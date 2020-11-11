@@ -10,6 +10,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 
 import java.io.File;
@@ -23,6 +24,8 @@ public class googleDef {
     public void launchGooglePage() {
         WebDriverManager.chromedriver().setup();
         driver=new ChromeDriver();
+        ChromeOptions opt=new ChromeOptions();
+        opt.addArguments("--headless");
         driver.get("http://google.com");
         driver.manage().window().maximize();
         Assert.assertEquals(driver.getTitle(),"Google");
@@ -46,7 +49,9 @@ public class googleDef {
 
     @After
     public void tearDown(){
-        driver.quit();
+        if(driver!=null){
+            driver.quit();
+        }
     }
 
     @Then("verify the search page")
