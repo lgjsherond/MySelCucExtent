@@ -58,6 +58,6 @@ public class googleDef {
     public void verifyTheHomePage() {
         driver.findElement(By.name("q")).sendKeys("Sheron");
         driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
-        Assert.assertEquals(driver.getTitle(),"Sheron - Gogle Search");
+        Assert.assertEquals(driver.getTitle(),"Sheron - Google Search");
     }
 }
