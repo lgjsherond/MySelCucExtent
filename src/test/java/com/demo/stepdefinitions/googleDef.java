@@ -40,11 +40,11 @@ public class googleDef {
 
     @AfterStep
     public void attach_screenshot() {
-        if(scenario.isFailed()){
+//        if(scenario.isFailed()){
             TakesScreenshot ts=(TakesScreenshot)driver;
             byte[] screenshot=ts.getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot,"image/png","");
-        }
+//        }
     }
 
     @After
