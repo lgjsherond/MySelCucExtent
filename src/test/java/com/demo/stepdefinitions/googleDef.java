@@ -23,9 +23,9 @@ public class googleDef {
     @Given("Launch google page")
     public void launchGooglePage() {
         WebDriverManager.chromedriver().setup();
-        driver=new ChromeDriver();
         ChromeOptions opt=new ChromeOptions();
         opt.addArguments("--headless");
+        driver=new ChromeDriver(opt);
         driver.get("http://google.com");
         driver.manage().window().maximize();
         Assert.assertEquals(driver.getTitle(),"Google");
