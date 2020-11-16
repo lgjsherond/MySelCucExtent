@@ -1,5 +1,8 @@
-Feature: Google Test
+Feature: JacPLUS Test
 
-  Scenario: Open Google Page
-    Given Launch google page
-    Then verify the search page
+  Scenario: Open JacPLUS Dashboard
+    Given Launch JacPLUS home page
+    And modify the cookie
+#    And reload the page
+    And enter credentials
+    Then verify the dashboard
