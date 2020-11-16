@@ -27,9 +27,9 @@ public class googleDef {
     @Given("Launch JacPLUS home page")
     public void launchGooglePage() {
         WebDriverManager.chromedriver().setup();
-//        ChromeOptions opt=new ChromeOptions();
-//        opt.addArguments("--headless");
-        driver=new ChromeDriver();
+        ChromeOptions opt=new ChromeOptions();
+        opt.addArguments("--headless");
+        driver=new ChromeDriver(opt);
         driver.get("https://www.jacplus.com.au/");
         driver.manage().window().maximize();
         Assert.assertEquals(driver.getTitle(),"JacarandaPLUS");
