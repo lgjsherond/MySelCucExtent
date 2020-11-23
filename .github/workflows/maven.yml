@@ -22,3 +22,10 @@ jobs:
         java-version: 13.0.2
     - name: Build with Maven
       run: mvn clean verify
+    
+    name: 'Upload Test Results Artifact'
+    uses: actions/upload-artifact@v2
+    with:
+      name: Extent Report
+      path: target/SparkReport/ExtentSpark.html
+      retention-days: 5
