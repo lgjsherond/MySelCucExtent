@@ -22,9 +22,10 @@ public class googleDef {
     @Given("Launch JacPLUS home page")
     public void launchGooglePage() {
         WebDriverManager.chromedriver().setup();
-        ChromeOptions opt=new ChromeOptions();
-        opt.addArguments("--headless");
-        driver=new ChromeDriver(opt);
+//        ChromeOptions opt=new ChromeOptions();
+//        opt.addArguments("--headless");
+//        driver=new ChromeDriver(opt);
+        driver=new ChromeDriver();
         driver.get("https://www.jacplus.com.au/");
         driver.manage().window().maximize();
         Assert.assertEquals(driver.getTitle(),"JacarandaPLUS");
@@ -71,7 +72,7 @@ public class googleDef {
 
     @And("enter credentials")
     public void enterCredentials() {
-        driver.findElement(By.name("username")).sendKeys("prodtest@wiley.lk");
+        driver.findElement(By.name("username")).sendKeys("github@demo.com");
         driver.findElement(By.name("username")).sendKeys(Keys.ENTER);
         WebDriverWait wait=new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.elementToBeClickable(By.name("password")));
@@ -99,6 +100,45 @@ public class googleDef {
     @And("waiting")
     public void waiting() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    }
+
+
+    @Then("click back to Bookshelf")
+    public void clickBackToBookshelf() {
+        driver.navigate().back();
+//        driver.findElement(By.partialLinkText("btnEbookGoBackToBookShelf")).click();
+//        driver.findElement(By.xpath("///*[@id=\"usermenu\"]")).click();
+//        driver.findElement(By.xpath("///*[@id=\"btnEbookGoBackToBookShelf\"]")).click();
+        Assert.assertEquals(driver.getTitle(),"JacPLUS - Your bookshelf");
+    }
+
+    @Then("Click on AssessON")
+    public void clickOnAssessON() {
+
+    }
+
+    @Then("click on eBook title {string}")
+    public void clickOnEBookTitle(String ck) {
+        driver.manage().deleteCookieNamed("CONTENT_JACPLUS_SESSION");
+        driver.manage().addCookie(new Cookie("CONTENT_JACPLUS_SESSION","contentjacplus.tc_"+ck));
+        WebElement ebuide=driver.findElement(By.linkText("Active Outcomes 1 2E PDHPE Stage 4"));
+        if(ebuide.isDisplayed()){
+            ebuide.click();
+            Assert.assertEquals(driver.getTitle(),"Active Outcomes 1 2E PDHPE Stage 4 eGuidePLUS EPUR");
+        }
+        Cookie eck=driver.manage().getCookieNamed("CONTENT_JACPLUS_SESSION");
+        scenario.log("My eBook Cookie value is :"+eck+"\n");
+
+    }
+
+    @Then("Click on AssessON {string}")
+    public void clickOnAssessON(String ack) {
+        driver.manage().deleteCookieNamed("ASSESSON_SESSION");
+        driver.manage().addCookie(new Cookie("ASSESSON_SESSION","assesson.tc_"+ack));
+        driver.findElement(By.linkText("assessON Core Science Stage 4 NSW Australian curriculum (CE)")).click();
+        Assert.assertEquals(driver.getTitle(),"assessON - assessON Core Science Stage 4 NSW Australian curriculum (CE)");
+        Cookie asck=driver.manage().getCookieNamed("ASSESSON_SESSION");
+        scenario.log("My AssessON Cookie value is :"+asck+"\n");
     }
 
 //    public String getBase64Screenshot(WebDriver driver) throws IOException {
