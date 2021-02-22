@@ -13,12 +13,23 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
 		<maven.compiler.version>3.8.1</maven.compiler.version>
+		<java.version>13</java.version>
 		<cucumber.version>6.6.0</cucumber.version>
 		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
 	</properties>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+<!--			Failsafe plugin required to generate the spark and PDF-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -31,16 +42,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compiler.version}</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-
 			</plugin>
 			<plugin>
 				<groupId>tech.grasshopper</groupId>
@@ -62,24 +63,6 @@
 					<strictCucumber6Behavior>true</strictCucumber6Behavior>
 				</configuration>
 			</plugin>
-
-			<!-- <plugin> -->
-			<!-- <groupId>org.apache.maven.plugins</groupId> -->
-			<!-- <artifactId>maven-surefire-plugin</artifactId> -->
-			<!-- <version>${maven.surefire.version}</version> -->
-			<!-- <configuration> -->
-			<!-- <includes> -->
-			<!-- <include>**/TestRunner.java</include> -->
-			<!-- </includes> -->
-			<!-- <parallel>methods</parallel> -->
-			<!-- <useUnlimitedThreads>true</useUnlimitedThreads> -->
-			<!--&lt;!&ndash; <suiteXmlFiles>&ndash;&gt; -->
-			<!--&lt;!&ndash; <suiteXmlFile>testng.xml</suiteXmlFile>&ndash;&gt; -->
-			<!--&lt;!&ndash; </suiteXmlFiles>&ndash;&gt; -->
-			<!-- </configuration> -->
-			<!-- </plugin> -->
-
-
 		</plugins>
 	</build>
 
@@ -102,32 +85,11 @@
 			<version>${cucumber.version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-core -->
-		<!-- <dependency> <groupId>io.cucumber</groupId> <artifactId>cucumber-core</artifactId> 
-			<version>${cucumber.version}</version> </dependency> -->
-
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-testng</artifactId>
 			<version>${cucumber.version}</version>
 		</dependency>
-
-		<!-- <dependency> <groupId>org.testng</groupId> <artifactId>testng</artifactId> 
-			<version>7.1.0</version> <scope>test</scope> </dependency> -->
-
-		<!-- &lt;!&ndash; https://mvnrepository.com/artifact/com.aventstack/extentreports 
-			&ndash;&gt; -->
-		<!-- <dependency> -->
-		<!-- <groupId>com.aventstack</groupId> -->
-		<!-- <artifactId>extentreports</artifactId> -->
-		<!-- <version>5.0.4</version> -->
-		<!-- </dependency> -->
-
-		<!-- https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber6-adapter -->
-		<!-- <dependency> <groupId>tech.grasshopper</groupId> <artifactId>extentreports-cucumber6-adapter</artifactId> 
-			<version>2.5.0</version> </dependency> -->
-
-
 
 	</dependencies>
 

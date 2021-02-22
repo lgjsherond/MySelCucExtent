@@ -7,9 +7,9 @@ Feature: JacPLUS Test
     And enter credentials
     Then verify the dashboard
 #    And waiting
-    Then Click on AssessON "<cook>"
-    Then click back to Bookshelf
-    Then  click on eBook title "<cook>"
+#    Then Click on AssessON "<cook>"
+#    Then click back to Bookshelf
+#    Then  click on eBook title "<cook>"
 
     Examples:
       | cook         |
