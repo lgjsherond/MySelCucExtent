@@ -1,128 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>Demo</artifactId>
-    <version>1.0-SNAPSHOT</version>
+	<groupId>org.example</groupId>
+	<artifactId>Demo</artifactId>
+	<version>1.0-SNAPSHOT</version>
 
-    <properties>
-        <maven.compiler.version>3.8.1</maven.compiler.version>
-        <java.version>13</java.version>
-        <cucumber.version>6.6.0</cucumber.version>
-        <maven.surefire.version>3.0.0-M5</maven.surefire.version>
-    </properties>
+	<properties>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+		<maven.compiler.version>3.8.1</maven.compiler.version>
+		<cucumber.version>6.6.0</cucumber.version>
+		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
+	</properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.version}</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
 
-            </plugin>
-            <plugin>
-                <groupId>tech.grasshopper</groupId>
-                <artifactId>extentreports-cucumberjson-plugin</artifactId>
-                <version>2.6.0</version>
-                <executions>
-                    <execution>
-                        <id>report</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>extentreport</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <cucumberJsonReportDirectory>${project.build.directory}/cucumber-reports</cucumberJsonReportDirectory>
-                    <extentPropertiesDirectory>${project.build.testResources[0].directory}</extentPropertiesDirectory>
-                    <displayAllHooks>false</displayAllHooks>
-                    <strictCucumber6Behavior>true</strictCucumber6Behavior>
-                </configuration>
-            </plugin>
+			</plugin>
+			<plugin>
+				<groupId>tech.grasshopper</groupId>
+				<artifactId>extentreports-cucumberjson-plugin</artifactId>
+				<version>2.6.0</version>
+				<executions>
+					<execution>
+						<id>report</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>extentreport</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<cucumberJsonReportDirectory>${project.build.directory}/cucumber-reports</cucumberJsonReportDirectory>
+					<extentPropertiesDirectory>${project.build.testResources[0].directory}</extentPropertiesDirectory>
+					<displayAllHooks>false</displayAllHooks>
+					<strictCucumber6Behavior>true</strictCucumber6Behavior>
+				</configuration>
+			</plugin>
 
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-surefire-plugin</artifactId>-->
-<!--                <version>${maven.surefire.version}</version>-->
-<!--                <configuration>-->
-<!--                    <includes>-->
-<!--                        <include>**/TestRunner.java</include>-->
-<!--                    </includes>-->
-<!--                    <parallel>methods</parallel>-->
-<!--                    <useUnlimitedThreads>true</useUnlimitedThreads>-->
-<!--&lt;!&ndash;                    <suiteXmlFiles>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <suiteXmlFile>testng.xml</suiteXmlFile>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </suiteXmlFiles>&ndash;&gt;-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-
-
-        </plugins>
-    </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>4.2.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-core -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-core</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-testng</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.1.0</version>
-            <scope>test</scope>
-        </dependency>
-
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.aventstack/extentreports &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.aventstack</groupId>-->
-<!--            <artifactId>extentreports</artifactId>-->
-<!--            <version>5.0.4</version>-->
-<!--        </dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber6-adapter -->
-        <dependency>
-            <groupId>tech.grasshopper</groupId>
-            <artifactId>extentreports-cucumber6-adapter</artifactId>
-            <version>2.5.0</version>
-        </dependency>
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-surefire-plugin</artifactId> -->
+			<!-- <version>${maven.surefire.version}</version> -->
+			<!-- <configuration> -->
+			<!-- <includes> -->
+			<!-- <include>**/TestRunner.java</include> -->
+			<!-- </includes> -->
+			<!-- <parallel>methods</parallel> -->
+			<!-- <useUnlimitedThreads>true</useUnlimitedThreads> -->
+			<!--&lt;!&ndash; <suiteXmlFiles>&ndash;&gt; -->
+			<!--&lt;!&ndash; <suiteXmlFile>testng.xml</suiteXmlFile>&ndash;&gt; -->
+			<!--&lt;!&ndash; </suiteXmlFiles>&ndash;&gt; -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
 
 
+		</plugins>
+	</build>
 
-    </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.59</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>4.2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucumber.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-core -->
+		<!-- <dependency> <groupId>io.cucumber</groupId> <artifactId>cucumber-core</artifactId> 
+			<version>${cucumber.version}</version> </dependency> -->
+
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-testng</artifactId>
+			<version>${cucumber.version}</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.testng</groupId> <artifactId>testng</artifactId> 
+			<version>7.1.0</version> <scope>test</scope> </dependency> -->
+
+		<!-- &lt;!&ndash; https://mvnrepository.com/artifact/com.aventstack/extentreports 
+			&ndash;&gt; -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.aventstack</groupId> -->
+		<!-- <artifactId>extentreports</artifactId> -->
+		<!-- <version>5.0.4</version> -->
+		<!-- </dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber6-adapter -->
+		<!-- <dependency> <groupId>tech.grasshopper</groupId> <artifactId>extentreports-cucumber6-adapter</artifactId> 
+			<version>2.5.0</version> </dependency> -->
+
+
+
+	</dependencies>
 
 </project>

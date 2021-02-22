@@ -15,7 +15,7 @@ import org.testng.annotations.DataProvider;
         glue = {"com.demo.stepdefinitions"}
 )
 
-public class TestRunner extends AbstractTestNGCucumberTests{
+public class CukeRunnerIT extends AbstractTestNGCucumberTests{
 
         @Override
         @DataProvider(parallel = true)
