@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
 		<maven.compiler.version>3.8.1</maven.compiler.version>
-		<java.version>13</java.version>
+		<java.version>11</java.version>
 		<cucumber.version>6.6.0</cucumber.version>
 		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
 	</properties>
